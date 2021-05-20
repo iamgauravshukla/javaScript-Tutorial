@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Key board Event</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0px;
+        padding: 0px;
+      }
+      body {
+        background-color: #000;
+        color: #fff;
+      }
+      .main {
+        display: flex;
+        width: 100%;
+        height: 100vh;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      p {
+        color: #fff;
+      }
+      #heading {
+        color: red;
+        display: block;
+        margin: 10px auto;
+      }
+      button {
+        cursor: pointer;
+        padding: 7px;
+        margin-bottom: 20px;
+        background-color: teal;
+        color: #fff;
+        border-radius: 5px;
+        border: none;
+      }
+      input {
+        width: 150px;
+        height: 30px;
+      }
+      #result{
+        padding-top: 20px;
+        color: teal;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main">
+      <label for="name">Your name:
+      <input type="text" id="username" /></label><br />
+      <label for="">Choose an Flavour:
+        <select name="iceCreams" id="flavour" onchange="selectFlavour()">
+          <option value="">Select Option</option>
+          <option value="vanilla">Vanilla</option>
+          <option value="chocolate">Chocolate</option>
+          <option value="strawberry">Strawberry</option>
+        </select>
+      </label>
+      <div id="result"></div>
+    </div>
+  </body>
+  <script>
+      const selectFlavour = ()=>{
+        const userName = document.getElementById('username').value;
+        const flavour = document.getElementById('flavour').value;
+        const result = document.getElementById('result');
+        result.innerHTML = `Thank you! ${userName} for choosing ${flavour} flavour your order is placed.`;
+
+      };
+      //another method
+      const flavour = document.getElementById('flavour');
+      flavour.addEventListener('change',()=>{
+        const userName = document.getElementById('username').value;
+        const result = document.getElementById('result');
+        result.innerHTML = `Thank you! ${userName} for choosing ${flavour.value} flavour your order is placed.`;
+      });
+
+  </script>
+</html>
