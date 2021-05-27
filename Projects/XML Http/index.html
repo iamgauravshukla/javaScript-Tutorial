@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Country Details</title>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+        .main{
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #000;
+        }
+        .main .card{
+            width: 260px;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: white;
+            border-radius: 10px;
+            color: #000;
+            box-shadow: 0px 0px 12px 3px teal;
+            transition: all 0.8s ease-in-out;
+        }
+        .card:hover{
+            width: 280px;
+            height: 310px;
+            box-shadow: 0px 0px 12px 3px chocolate;
+            transform-style: flat;
+        }
+        #flag img{
+            width: 150px;
+            height: 150px;
+        }
+
+        .details,.capital,.names{
+            width: 100%;
+            padding: 10px;
+            display: flex;
+            justify-content: space-around;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="card">
+            <div id="flag"><img id="flag-img" src="" alt=""></div>
+            <div class="names">
+                <p id="name"></p>
+                <p id="nativeName"></p>
+            </div>
+            <div class="capital">
+                <p>Capital:</p>
+                <p id="capital"></p>
+            </div>
+            <div class="details">
+                <p id="language"></p>
+                <p id="population"></p>
+            </div>
+        </div>
+    </div>
+    <script>
+        const card = document.querySelector('.card');
+        const request = new XMLHttpRequest();
+        request.open('GET','https://restcountries.eu/rest/v2/callingcode/91');
+        request.send();
+
+        // to get the Data 
+        request.addEventListener('load', function(){
+            const [data] = JSON.parse(this.responseText);
+            console.log(data)
+            document.getElementById('flag-img').src = data.flag;
+            document.getElementById('name').innerHTML = data.name;
+            document.getElementById('nativeName').innerHTML = data.nativeName;
+            document.getElementById('capital').innerHTML = data.capital;
+            const lang = data.languages[0].name;
+            document.getElementById('language').innerHTML = lang;
+            document.getElementById('population').innerHTML = data.population;
+            
+        });
+    </script>
+</body>
+</html>

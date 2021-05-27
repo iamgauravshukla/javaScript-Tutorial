@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Jokes</title>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgb(60, 69, 71);
+            width: 100vw;
+            height: 100vh;
+        }
+        .main{
+            background-color: rgb(117, 95, 4);
+            color: #fff;
+            width: 40%;
+            height: 250px;
+            border-radius: 15px;
+            box-shadow: 0px 0px 18px 3px rgb(167, 163, 163);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .main h3{
+            padding: 20px 0px;
+        }
+        .joke{
+            width: 80%;
+            padding: 10px 20px;
+            height: 100px;
+            text-align: center;
+            font-size: 17px;
+        }
+        .btn{
+            padding: 7px 7px;
+            background-color: rgb(32, 97, 128);
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+            transition: all 0.4s ease-in-out;
+        }
+        .btn:hover{
+            background-color: rgb(26, 133, 182);
+        }
+
+    </style>
+</head>
+<body>
+    <div class="main">
+        <h3>&#128519; A joke in a day keeps Stress away &#128540;</h3>
+        <div id="jokes" class="joke">&#129313;Keep Calm joke is loading...</div>
+        <button id="Jokebtn" class="btn">Next Joke &#10145;</button>
+    </div>
+<script>
+    const jokes = document.querySelector('#jokes');
+    const jokebtn = document.querySelector('#Jokebtn');
+
+    // Method-1 Promises 
+   
+    // const loadJokes = ()=>{
+    //     const setHeader = {
+    //     headers: {
+    //         Accept: 'application/json'
+    //     }
+    // }
+    //     fetch('https://icanhazdadjoke.com/', setHeader)
+    //     .then((res)=> res.json())
+    //     .then((data)=>{
+    //         jokes.innerHTML = data.joke;
+    //     }).catch((error)=>{
+    //         jokes.innerHTML = `Oops please check ${error}`;
+    //     })
+    // };
+
+    
+    //Method 2 : Async await better way
+    const loadJokes = async ()=>{
+
+        try{
+            const setHeader = {
+        headers: {
+            Accept: 'application/json'
+        }}
+        const res = await fetch('https://icanhazdadjoke.com/', setHeader);
+        const data = await res.json();
+        jokes.innerHTML = data.joke;
+        }catch(error){
+            jokes.innerHTML = `Oops please check ${error}`;
+        }    
+    };
+
+
+
+    jokebtn.addEventListener('click', loadJokes);
+    loadJokes();
+</script>
+</body>
+</html>
